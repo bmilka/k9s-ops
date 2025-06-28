@@ -1,0 +1,18 @@
+flux_reconcile_git:
+  shortCut: Shift-R
+  confirm: true
+  scopes:
+    - gitrepositories
+  description: |
+    Reconcile
+  command: bash
+  background: false
+  args:
+    - -c
+    - >-
+      flux
+      reconcile source git
+      --kubeconfig="$KUBECONFIG"
+      --context="$CONTEXT"
+      --namespace="$NAMESPACE"
+      "$NAME"

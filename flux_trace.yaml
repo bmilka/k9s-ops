@@ -1,0 +1,20 @@
+flux_trace:
+  shortCut: Shift-E
+  scopes:
+    - all
+  description: |
+    Trace
+  command: bash
+  background: false
+  args:
+    - -c
+    - >-
+      flux
+      trace
+      --kubeconfig="$KUBECONFIG"
+      --context="$CONTEXT"
+      --namespace="$NAMESPACE"
+      --kind=$(echo "$RESOURCE_NAME" | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s)$//')
+      --api-version="$RESOURCE_GROUP/$RESOURCE_VERSION"
+      "$NAME"
+      | less -K
