@@ -11,3 +11,9 @@ views:
       - NAMESPACE
       - NAME
       - SUSPEND:.spec.suspend
+
+  v1/pods:
+    columns:
+      - PF|W
+      - '%CPU/R|H'
+      - '%MEM/R|H'
