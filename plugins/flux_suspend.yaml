@@ -1,0 +1,26 @@
+flux_suspend:
+  shortCut: Shift-S
+  scopes:
+    - gitrepositories
+    - kustomizations
+    - helmreleases
+  description: |
+    Suspend/Resume
+  command: bash
+  background: false
+  args:
+    - -c
+    - >-
+      case "$RESOURCE_NAME" in
+        gitrepositories) RESOURCE="source git";;
+        kustomizations)  RESOURCE="kustomization";;
+        helmreleases)    RESOURCE="helmrelease";;
+        *) echo "Unsupported resource: $RESOURCE_NAME" | less --CLEAR-SCREEN; exit 1;;
+      esac;
+      SUSPENDED=$(kubectl --kubeconfig="$KUBECONFIG" --context="$CONTEXT" get "$RESOURCE_NAME" --namespace="$NAMESPACE" "$NAME" -o=custom-columns=TYPE:.spec.suspend | tail -1);
+      VERB=$([ $SUSPENDED = "true" ] && echo "resume" || echo "suspend");
+      flux $VERB $RESOURCE
+      --kubeconfig="$KUBECONFIG"
+      --context="$CONTEXT"
+      --namespace="$NAMESPACE"
+      "$NAME"

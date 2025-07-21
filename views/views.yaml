@@ -1,0 +1,19 @@
+views:
+  source.toolkit.fluxcd.io/v1beta2/gitrepositories:
+    columns:
+      - NAMESPACE
+      - NAME
+      - SUSPEND:.spec.suspend
+      - READY
+
+  kustomize.toolkit.fluxcd.io/v1beta2/kustomizations:
+    columns:
+      - NAMESPACE
+      - NAME
+      - SUSPEND:.spec.suspend
+
+  v1/pods:
+    columns:
+      - PF|W
+      - '%CPU/R|H'
+      - '%MEM/R|H'

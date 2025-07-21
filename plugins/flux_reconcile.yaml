@@ -1,0 +1,25 @@
+flux_reconcile:
+  shortCut: Shift-R
+  confirm: true
+  scopes:
+    - gitrepositories
+    - kustomizations
+    - helmreleases
+  description: |
+    Reconcile
+  command: bash
+  background: false
+  args:
+    - -c
+    - >-
+      case "$RESOURCE_NAME" in
+        gitrepositories) RESOURCE="source git";;
+        kustomizations)  RESOURCE="kustomization";;
+        helmreleases)    RESOURCE="helmrelease";;
+        *) echo "Unsupported resource: $RESOURCE_NAME" | less --CLEAR-SCREEN; exit 1;;
+      esac;
+      flux reconcile $RESOURCE
+      --kubeconfig="$KUBECONFIG"
+      --context="$CONTEXT"
+      --namespace="$NAMESPACE"
+      "$NAME"

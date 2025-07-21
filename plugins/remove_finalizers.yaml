@@ -1,0 +1,19 @@
+remove_finalizers:
+  shortCut: Ctrl-F
+  confirm: true
+  dangerous: true
+  scopes:
+    - all
+  description: |
+    Remove finalizers
+  command: kubectl
+  background: true
+  args:
+    - --kubeconfig=$KUBECONFIG
+    - --context=$CONTEXT
+    - patch
+    - $RESOURCE_NAME.$RESOURCE_GROUP
+    - --namespace=$NAMESPACE
+    - $NAME
+    - --patch=[{"op":"remove","path":"/metadata/finalizers"}]
+    - --type=json
