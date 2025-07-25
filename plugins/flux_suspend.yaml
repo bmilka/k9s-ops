@@ -1,5 +1,5 @@
 flux_suspend:
-  shortCut: Shift-S
+  shortCut: s
   scopes:
     - gitrepositories
     - kustomizations

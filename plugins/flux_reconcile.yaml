@@ -1,6 +1,5 @@
 flux_reconcile:
-  shortCut: Shift-R
-  confirm: true
+  shortCut: r
   scopes:
     - gitrepositories
     - kustomizations
