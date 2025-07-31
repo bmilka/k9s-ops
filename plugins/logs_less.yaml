@@ -1,0 +1,17 @@
+# https://github.com/derailed/k9s/blob/master/plugins/log-full.yaml
+logs-less-container:
+  background: false
+  command: bash
+  description: "Full Logs"
+  shortCut: Shift-L
+  scopes:
+  - containers
+  args:
+  - -c
+  - >-
+    kubectl logs "$POD"
+    --kubeconfig="$KUBECONFIG"
+    --context="$CONTEXT"
+    --namespace="$NAMESPACE"
+    --container="$NAME"
+    | less
