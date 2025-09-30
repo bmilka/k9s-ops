@@ -16,5 +16,5 @@ flux_trace:
       --namespace="$NAMESPACE"
       --kind=$(echo "$RESOURCE_NAME" | sed -E 's/ies$/y/' | sed -E 's/ses$/se/' | sed -E 's/(s)$//')
       --api-version="$RESOURCE_GROUP/$RESOURCE_VERSION"
-      "$NAME"
-      | less --CLEAR-SCREEN
+      "$NAME";
+      IFS= read -rsn1 _
