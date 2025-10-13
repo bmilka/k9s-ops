@@ -19,5 +19,5 @@ flux_trace:
       ${NAMESPACE_ARG}
       --kind="${KIND}"
       --api-version="$RESOURCE_GROUP/$RESOURCE_VERSION"
-      "$NAME" 2>&1
-      | less --CLEAR-SCREEN
+      "$NAME";
+      IFS= read -rsn1 _
