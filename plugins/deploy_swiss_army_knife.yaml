@@ -1,0 +1,20 @@
+deploy_swiss_army_knife:
+  shortCut: Ctrl-N
+  scopes:
+    - pods
+  description: |
+    Knife
+  command: kubectl
+  background: true
+  args:
+    - --kubeconfig=$KUBECONFIG
+    - --context=$CONTEXT
+    - --namespace=default
+    - run
+    - swiss-army-knife
+    - --image=leodotcloud/swiss-army-knife
+    - --restart=Never
+    - --command
+    - --
+    - sleep
+    - 4h
