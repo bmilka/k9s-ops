@@ -4,6 +4,8 @@ flux_reconcile:
     - gitrepositories
     - kustomizations
     - helmreleases
+    - helmreleases
+    - ocirepositories
   description: |
     Reconcile
   command: bash
@@ -12,9 +14,11 @@ flux_reconcile:
     - -c
     - >-
       case "$RESOURCE_NAME" in
-        gitrepositories) RESOURCE="source git";;
-        kustomizations)  RESOURCE="kustomization";;
-        helmreleases)    RESOURCE="helmrelease";;
+        gitrepositories)  RESOURCE="source git";;
+        kustomizations)   RESOURCE="kustomization";;
+        helmreleases)     RESOURCE="helmrelease";;
+        helmrepositories) RESOURCE="source helm";;
+        ocirepositories)  RESOURCE="source oci";;
         *) echo "Unsupported resource: $RESOURCE_NAME" | less --CLEAR-SCREEN; exit 1;;
       esac;
       flux reconcile $RESOURCE
