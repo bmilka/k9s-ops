@@ -1,0 +1,19 @@
+flux_tree:
+  shortCut: t
+  scopes:
+    - kustomizations
+  description: |
+    Tree
+  command: bash
+  background: false
+  args:
+    - -c
+    - >-
+      flux
+      tree
+      kustomization
+      --kubeconfig="$KUBECONFIG"
+      --context="$CONTEXT"
+      --namespace="$NAMESPACE"
+      "$NAME" 2>&1
+      | less --CLEAR-SCREEN
