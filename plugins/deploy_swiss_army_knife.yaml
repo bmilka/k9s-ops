@@ -1,0 +1,36 @@
+deploy_swiss_army_knife:
+  shortCut: Ctrl-N
+  scopes:
+    - jobs
+    - pods
+  description: |
+    Knife
+  command: bash
+  background: true
+  args:
+    - -c
+    - |
+      kubectl \
+      --kubeconfig=$KUBECONFIG \
+      --context=$CONTEXT \
+      apply \
+      -f - << EOF
+      apiVersion: batch/v1
+      kind: Job
+      metadata:
+        name: swiss-army-knife
+        namespace: default
+      spec:
+        ttlSecondsAfterFinished: 1
+        backoffLimit: 0
+        template:
+          metadata:
+            labels:
+              app: swiss-army-knife
+          spec:
+            restartPolicy: Never
+            containers:
+              - name: swiss-army-knife
+                image: docker.io/leodotcloud/swiss-army-knife
+                command: ["sleep", "4h"]
+      EOF
