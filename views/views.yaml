@@ -1,19 +1,30 @@
 views:
-  source.toolkit.fluxcd.io/v1beta2/gitrepositories:
+  source.toolkit.fluxcd.io/v1/gitrepositories: &gitrepos
     columns:
       - NAMESPACE
       - NAME
       - SUSPEND:.spec.suspend
       - READY
 
-  kustomize.toolkit.fluxcd.io/v1beta2/kustomizations:
+  source.toolkit.fluxcd.io/v1beta2/gitrepositories: *gitrepos
+
+  kustomize.toolkit.fluxcd.io/v1/kustomizations: &kustomizations
     columns:
       - NAMESPACE
       - NAME
       - SUSPEND:.spec.suspend
 
+  kustomize.toolkit.fluxcd.io/v1beta2/kustomizations: *kustomizations
+
   v1/pods:
+    sortColumn: NAME:desc
     columns:
       - PF|W
       - '%CPU/R|H'
       - '%MEM/R|H'
+
+  compute.api.onmetal.de/v1alpha1/machines:
+    columns:
+      - NAMESPACE
+      - NAME
+      - UID:.metadata.uid|W
