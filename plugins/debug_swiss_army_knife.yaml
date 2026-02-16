@@ -1,0 +1,18 @@
+debug_swiss_army_knife:
+  shortCut: Ctrl-N
+  scopes:
+    - containers
+  description: |
+    Debug
+  command: kubectl
+  background: true
+  args:
+    - --kubeconfig=$KUBECONFIG
+    - --context=$CONTEXT
+    - --namespace=$NAMESPACE
+    - debug
+    - $NAME
+    - --image=leodotcloud/swiss-army-knife
+    - --
+    - sleep
+    - 4h
