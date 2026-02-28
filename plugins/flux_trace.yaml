@@ -9,7 +9,7 @@ flux_trace:
   args:
     - -c
     - >-
-      KIND=$(echo "$RESOURCE_NAME" | sed -E 's/ies$/y/; s/ses$/se/; s/(s)$//');
+      KIND=$(echo "$RESOURCE_NAME" | sed -E 's/([a-z])ses$/\1ss/; s/ies$/y/; s/ses$/se/; s/s$//');
       NAMESPACE_ARG=""; [ "${NAMESPACE}" != "-" ] && NAMESPACE_ARG="--namespace=${NAMESPACE}";
 
       flux
@@ -19,5 +19,5 @@ flux_trace:
       ${NAMESPACE_ARG}
       --kind="${KIND}"
       --api-version="$RESOURCE_GROUP/$RESOURCE_VERSION"
-      "$NAME";
-      IFS= read -rsn1 _
+      "$NAME" 2>&1
+      | less --CLEAR-SCREEN

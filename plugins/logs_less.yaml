@@ -14,4 +14,4 @@ logs-less-container:
     --context="$CONTEXT"
     --namespace="$NAMESPACE"
     --container="$NAME"
-    | less
+    | less -R
